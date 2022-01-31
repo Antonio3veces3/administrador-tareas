@@ -6,6 +6,7 @@ const txtInput = document.querySelector('.new-todo');
 const btnClearCompleted =  document.querySelector('.clear-completed');
 const ulFIlters =  document.querySelector('.filters');
 const anchorFiltros= document.querySelectorAll('.filtro');
+const numCount =  document.querySelector('.numCount');
 
 export const crearTodoHtml = ( todo ) => {
     const htmlTodo = `
@@ -27,6 +28,11 @@ export const crearTodoHtml = ( todo ) => {
     return div.firstElementChild;
 }
 
+//CREAR TEXTO DE PENDIENTES
+export function updatePendientes( ){
+    let count = todoList.countPendientes();
+    numCount.innerText = count;
+}
 
 //Eventos
 txtInput.addEventListener( 'keyup', (event)=>{
@@ -36,6 +42,7 @@ txtInput.addEventListener( 'keyup', (event)=>{
         crearTodoHtml(newTarea);
         txtInput.value = '';
     }
+    updatePendientes();
 })
 
 divTodoList.addEventListener('click', (event) => {
@@ -51,6 +58,7 @@ divTodoList.addEventListener('click', (event) => {
         todoList.eliminarTodo(todoId);
         divTodoList.removeChild(todoElemento);
     }
+    updatePendientes();
 })
 
 btnClearCompleted.addEventListener('click', () => {
@@ -61,6 +69,7 @@ btnClearCompleted.addEventListener('click', () => {
             divTodoList.removeChild(elemento);
         }
     }
+    updatePendientes();
 });
 
 ulFIlters.addEventListener('click', (event) => {

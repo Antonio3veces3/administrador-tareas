@@ -31,6 +31,16 @@ export class TodoList {
         this.todos = this.todos.filter( todo => !todo.completado);
         this.guardarLocalStorage();
     }
+
+    countPendientes(){
+        let count=0;
+        for(let todo of this.todos){
+            if(todo.completado === false){
+                count++;
+            }
+        }
+        return count; 
+    }
     
     guardarLocalStorage(){
         localStorage.setItem('todo', JSON.stringify(this.todos));
